@@ -5,6 +5,8 @@
     <QuestionCard
       v-else-if="gameState === 'playing'"
       :question="questions[currentIndex]"
+      :current="currentIndex"
+      :total="questions.length"
       @answer="handleAnswer"
     />
     

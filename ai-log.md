@@ -1,5 +1,7 @@
 # Phase 1
 
+## Milestone 2
+
 #### Prompt: 
 
 Write a Vue 3 single-file component called StartScreen. It should display a heading that says 'QuizBlitz', a short tagline, and a button labelled 'Play'. When the button is clicked, it emits an event called 'start'. Use the Options API (not Composition API). No props needed.
@@ -61,6 +63,8 @@ export default {
 }
 </script>
 ```
+
+## Milestone 3
 
 #### Prompt: 
 
@@ -193,6 +197,8 @@ Put the following into `App.vue`:
 </script>
 ```
 
+## Milestone 4
+
 #### Prompt: 
 
 Using this template, add 10 sample questions:
@@ -310,3 +316,8 @@ methods: {
   }
 ```
 
+## Stretch Goal
+
+#### Prompt: 
+
+How can I add a visual indicator of "Question x of 10" below the question card?

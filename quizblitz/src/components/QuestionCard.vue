@@ -12,6 +12,8 @@
         {{ answer }}
       </button>
     </div>
+
+    <p class="progress">Question {{ current + 1 }} of {{ total }}</p>
   </div>
 </template>
 
@@ -29,7 +31,9 @@
                         typeof q.correct === 'number'
                     );
                 }
-            }
+            },
+            current: { type: Number, required: true }, 
+            total: { type: Number, required: true }
         },
         data() {
             return {
