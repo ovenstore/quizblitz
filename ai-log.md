@@ -193,4 +193,120 @@ Put the following into `App.vue`:
 </script>
 ```
 
+#### Prompt: 
+
+Using this template, add 10 sample questions:
+
+```JS
+data() {
+  return {
+    questions: [], // you will fill this with your 10 questions
+    currentIndex: 0,
+    score: 0,
+    gameState: "start" // "start" | "playing" | "end"
+  }
+}
+```
+
+#### Response: 
+
+```JS
+data() {
+  return {
+    questions: [
+      {
+        question: 'What is 2 + 2?',
+        answers: ['1', '2', '3', '4'],
+        correct: 3
+      },
+      {
+        question: 'Capital of France?',
+        answers: ['Paris', 'London', 'Rome', 'Berlin'],
+        correct: 0
+      },
+      {
+        question: 'Vue.js is a ___ framework?',
+        answers: ['Backend', 'Frontend', 'Database', 'Operating System'],
+        correct: 1
+      },
+      {
+        question: 'Which planet is known as the Red Planet?',
+        answers: ['Earth', 'Mars', 'Jupiter', 'Venus'],
+        correct: 1
+      },
+      {
+        question: 'Who wrote "Romeo and Juliet"?',
+        answers: ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
+        correct: 1
+      },
+      {
+        question: 'What is the largest ocean on Earth?',
+        answers: ['Atlantic', 'Indian', 'Arctic', 'Pacific'],
+        correct: 3
+      },
+      {
+        question: 'What is the chemical symbol for water?',
+        answers: ['O2', 'H2O', 'CO2', 'HO2'],
+        correct: 1
+      },
+      {
+        question: 'Which country hosted the 2016 Summer Olympics?',
+        answers: ['China', 'Brazil', 'UK', 'Russia'],
+        correct: 1
+      },
+      {
+        question: 'What is the square root of 64?',
+        answers: ['6', '7', '8', '9'],
+        correct: 2
+      },
+      {
+        question: 'Which gas do plants absorb from the atmosphere?',
+        answers: ['Oxygen', 'Carbon Dioxide', 'Nitrogen', 'Hydrogen'],
+        correct: 1
+      }
+    ],
+    currentIndex: 0,
+    score: 0,
+    gameState: "start" // "start" | "playing" | "end"
+  }
+}
+```
+
+#### Prompt: 
+
+Implement the following methods and tell me where to put them in the `App.vue` file:
+
+- `startGame()` — sets `gameState` to `"playing"` and resets `currentIndex` and `score` to `0`.
+
+- `handleAnswer(isCorrect)` — increments `score` if `isCorrect` is `true`, then increments `currentIndex`. If `currentIndex` equals `questions.length`, set `gameState` to `"end"`.
+
+- `resetGame()` — sets `gameState` back to `"start"`.
+
+#### Response:
+
+```JS
+methods: {
+    startGame() {
+      this.gameState = 'playing';
+      this.currentIndex = 0;
+      this.score = 0;
+    },
+
+    handleAnswer(isCorrect) {
+      if (isCorrect) {
+        this.score++;
+      }
+
+      this.currentIndex++;
+
+      if (this.currentIndex >= this.questions.length) {
+        this.gameState = 'end';
+      }
+    },
+
+    resetGame() {
+      this.gameState = 'start';
+    }
+  }
+```
 
