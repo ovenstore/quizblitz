@@ -11,7 +11,8 @@
         name: 'StartScreen',
         methods: {
             startGame() {
-                this.$router.push('/play');
+                sessionStorage.setItem('gameStarted', 'true')
+                this.$router.push({ name: 'play' })
             }
         }
     }
