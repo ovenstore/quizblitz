@@ -2,4 +2,8 @@
 
 **\[GPT 5.3]** I have a Vue 3 quiz game using the Options API. Write a PlayView.vue that contains the game logic. It should have a questions array (I'll fill in the data), a currentIndex, a score, and a gameState of 'playing' or 'end'. In mounted(), call startGame(). When the game ends, use this.$router.push({ name: 'home' }) to return to the home screen. The template shows a QuestionCard component while playing, and a ScoreBoard component when done. Show me the full single-file component.
 
+**\[GPT 5.3]** Can you help me style the nav bar? How do I make it appear at the top of the page?
+
+
+
 
