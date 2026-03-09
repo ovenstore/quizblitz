@@ -13,4 +13,5 @@ app.use(router)
 app.mount('#app')
 
 // temporary, so that we can see state in dev tools
-const store = useGameStore();
+const gameStore = useGameStore()
+window.gameStore = gameStore
