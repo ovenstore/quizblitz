@@ -7,12 +7,19 @@
 </template>
 
 <script>
+    import { useGameStore } from '../stores/gameStore.js'
+
     export default {
-        name: 'StartScreen',
+        name: 'HomeView',
+
+        setup() {
+            return { store: useGameStore() }
+        },
+
         methods: {
             startGame() {
-                sessionStorage.setItem('gameStarted', 'true')
-                this.$router.push({ name: 'play' })
+            this.store.startGame()
+            this.$router.push({ name: 'play' })
             }
         }
     }
