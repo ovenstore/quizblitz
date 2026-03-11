@@ -1,17 +1,9 @@
 <template>
   <div>
     <QuestionCard
-      v-if="gameState === 'playing'"
-      :question="questions[currentIndex]"
-      :current="currentIndex"
-      :total="questions.length"
-      @answer="handleAnswer"
-    />
-
-    <ScoreBoard
-      v-else
-      :score="score"
-      @restart="goHome"
+      :question="{ question: 'Test?', answers: ['A','B','C','D'], correct: 2 }"
+      :selectedAnswer="null"
+      @answer="(i) => console.log('clicked index:', i)"
     />
   </div>
 </template>
