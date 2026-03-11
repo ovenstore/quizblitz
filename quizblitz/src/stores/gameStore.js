@@ -10,7 +10,9 @@ export const useGameStore = defineStore('game', {
         gameState: 'start',    // 'start' | 'playing' | 'end'
         selectedAnswer: null,  // index of the button the player clicked, or null
         timeLeft: 15,
-        _timerInterval: null   // internal — managed by the store only
+        _timerInterval: null,   // internal — managed by the store only
+        streak: 0,
+        bestStreak: 0
     }),
 
     getters: {
@@ -67,7 +69,16 @@ export const useGameStore = defineStore('game', {
             this._stopTimer()
             this.selectedAnswer = answerIndex
             const isCorrect = answerIndex === this.currentQuestion.correct
-            if (isCorrect) this.score++
+
+            if (isCorrect) {
+                this.score++
+                this.streak++
+                if (this.streak > this.bestStreak) this.bestStreak = this.streak
+                if (this.streak % 3 === 0) this.score++  // bonus every 3 in a row
+            } else {
+                this.streak = 0
+            }
+
             setTimeout(() => {
                 this.nextQuestion()
             }, 1000)
@@ -90,6 +101,7 @@ export const useGameStore = defineStore('game', {
             this.questions = []
             this.currentIndex = 0
             this.score = 0
+            this.streak = 0
             this.gameState = 'start'
             this.selectedAnswer = null
             this.timeLeft = 15
