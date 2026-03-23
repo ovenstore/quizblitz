@@ -12,7 +12,9 @@ export const useGameStore = defineStore('game', {
         timeLeft: 15,
         _timerInterval: null,   // internal — managed by the store only
         streak: 0,
-        bestStreak: 0
+        bestStreak: 0,
+        playerName: '',
+        scoreSubmitted: false
     }),
 
     getters: {
@@ -108,6 +110,24 @@ export const useGameStore = defineStore('game', {
             this.gameState = 'start'
             this.selectedAnswer = null
             this.timeLeft = 15
+        },
+
+        async submitScore() {
+            if (!this.playerName.trim()) return
+
+            const response = await fetch('http://localhost:3000/api/scores', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                playerName: this.playerName,
+                score: this.score,
+                totalQuestions: this.questions.length
+                })
+            })
+
+            if (response.ok) {
+                this.scoreSubmitted = true
+            }
         }
     }
 })

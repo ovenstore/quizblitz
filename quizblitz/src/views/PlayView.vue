@@ -35,7 +35,6 @@
       :total="store.questions.length"
       @restart="handleRestart"
     />
-
   </div>
 </template>
 
