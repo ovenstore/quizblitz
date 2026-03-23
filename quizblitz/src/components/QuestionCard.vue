@@ -1,5 +1,6 @@
 <template>
     <div class="question-card">
+        <p class="timer">Time left: {{ store.timeLeft }}</p>
         <p class="question-text">{{ question.question }}</p>
         <div class="answers">
         <button
@@ -16,35 +17,41 @@
 </template>
 
 <script>
-    export default {
-        name: 'QuestionCard',
-        props: {
-            question: {
-                type: Object,
-                required: true,
-            },
-            selectedAnswer: {
-                type: Number,
-                default: null
-            }
-        },
-        data() {
-            return {};
-        },
-        methods: {
-            selectAnswer(index) {
-                if (this.selectedAnswer !== null) return  // already answered, ignore
-                this.$emit('answer', index)
-            },
+import { useGameStore } from '../stores/gameStore.js'
 
-            buttonClass(index) {
-                if (this.selectedAnswer === null) return ''
-                if (index === this.question.correct) return 'correct'
-                if (index === this.selectedAnswer) return 'wrong'
-                return ''
-            }
+export default {
+    name: 'QuestionCard',
+    props: {
+        question: {
+            type: Object,
+            required: true,
+        },
+        selectedAnswer: {
+            type: Number,
+            default: null
         }
-    };
+    },
+    data() {
+        return {};
+    },
+    setup() {
+        const store = useGameStore()
+        return { store }
+    },
+    methods: {
+        selectAnswer(index) {
+            if (this.selectedAnswer !== null) return  // already answered, ignore
+            this.$emit('answer', index)
+        },
+
+        buttonClass(index) {
+            if (this.selectedAnswer === null) return ''
+            if (index === this.question.correct) return 'correct'
+            if (index === this.selectedAnswer) return 'wrong'
+            return ''
+        }
+    }
+};
 </script>
 
 <style scoped>
