@@ -110,6 +110,7 @@ export const useGameStore = defineStore('game', {
             this.gameState = 'start'
             this.selectedAnswer = null
             this.timeLeft = 15
+            this.scoreSubmitted = false
         },
 
         async submitScore() {
