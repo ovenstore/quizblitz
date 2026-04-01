@@ -14,7 +14,9 @@ export const useGameStore = defineStore('game', {
         streak: 0,
         bestStreak: 0,
         playerName: '',
-        scoreSubmitted: false
+        scoreSubmitted: false,
+        token: localStorage.getItem('quizblitz_token') || null,
+        userEmail: localStorage.getItem('quizblitz_email') || null
     }),
 
     getters: {
@@ -114,21 +116,54 @@ export const useGameStore = defineStore('game', {
         },
 
         async submitScore() {
-            if (!this.playerName.trim()) return
-
             const response = await fetch('http://localhost:3000/api/scores', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.token}`
+                },
                 body: JSON.stringify({
-                playerName: this.playerName,
-                score: this.score,
-                totalQuestions: this.questions.length
+                    score: this.score,
+                    totalQuestions: this.questions.length
                 })
             })
-
+            
             if (response.ok) {
                 this.scoreSubmitted = true
             }
+        },
+
+        async register(email, password) {
+            const response = await fetch('http://localhost:3000/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            })
+            const data = await response.json()
+            if (!response.ok) throw new Error(data.error)
+            return data
+        },
+
+        async login(email, password) {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            })
+            const data = await response.json()
+            if (!response.ok) throw new Error(data.error)
+            this.token = data.token
+            this.userEmail = data.email
+            localStorage.setItem('quizblitz_token', data.token)
+            localStorage.setItem('quizblitz_email', data.email)
+            return data
+        },
+
+        logout() {
+            this.token = null
+            this.userEmail = null
+            localStorage.removeItem('quizblitz_token')
+            localStorage.removeItem('quizblitz_email')
         }
     }
 })

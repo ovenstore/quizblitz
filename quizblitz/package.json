@@ -10,6 +10,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.1.1",
     "pinia": "^3.0.4",
     "vue": "^3.5.25",
