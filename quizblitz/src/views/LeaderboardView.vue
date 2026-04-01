@@ -1,21 +1,22 @@
 <template>
-  <div class="leaderboard">
+  <div class="leaderboard container card">
     <h1>Leaderboard</h1>
 
     <p v-if="loading">Loading scores...</p>
 
     <p v-else-if="error">Could not load scores. Is the server running?</p>
 
-    <ol v-else-if="scores.length > 0">
-      <li v-for="entry in scores" :key="entry._id">
+    <ul v-else-if="scores.length > 0" class="leaderboard-list">
+      <li v-for="entry in scores" :key="entry._id" class="leaderboard-row">
+        <span class="rank">{{ entry.rank ?? (scores.indexOf(entry) + 1) }}</span>
         <span class="name">{{ entry.playerName }}</span>
         <span class="score">{{ entry.score }} / {{ entry.totalQuestions }}</span>
       </li>
-    </ol>
+    </ul>
 
     <p v-else>No scores yet. Be the first to play!</p>
 
-    <RouterLink to="/">← Back to home</RouterLink>
+    <RouterLink class="btn-secondary" to="/">← Back to home</RouterLink>
   </div>
 </template>
 
@@ -44,7 +45,59 @@ export default {
 </script>
 
 <style scoped>
+.leaderboard {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.leaderboard h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #f8fafc;
+}
+
+.leaderboard p {
+  color: #cbd5e1;
+  margin: 0.6rem 0;
+}
+
+.leaderboard-list {
+  list-style: none;
+  margin: 0.75rem 0 1.25rem;
+  padding: 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 110px;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.rank {
+  font-weight: 700;
+  color: #facc15;
+  text-align: center;
+}
+
 .name {
-    padding-right: 20px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.score {
+  text-align: right;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.btn-secondary {
+  display: inline-block;
+  margin-top: 1rem;
 }
 </style>

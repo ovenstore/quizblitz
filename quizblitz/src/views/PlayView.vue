@@ -1,5 +1,5 @@
 <template>
-  <div class="play-view">
+  <div class="play-view container card">
 
     <!-- Timer bar -->
     <div class="timer-bar">
@@ -70,26 +70,38 @@ export default {
 <style scoped>
 .timer-bar {
   width: 100%;
-  height: 8px;
-  background: #333;
-  border-radius: 4px;
+  max-width: 760px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
   margin-bottom: 1rem;
   overflow: hidden;
 }
 
 .timer-fill {
   height: 100%;
-  background: #4caf50;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
   transition: width 0.9s linear;
 }
 
 .timer-fill.urgent {
-  background: #e53935;
+  background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
 .progress {
   text-align: center;
-  color: #aaa;
+  color: #cbd5e1;
   margin-bottom: 1rem;
 }
+
+.play-view {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
 </style>

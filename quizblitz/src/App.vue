@@ -1,55 +1,89 @@
 <template>
   <div id="app">
-    <nav>
+    <nav class="navbar">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/leaderboard">Leaderboard</RouterLink>
+      <RouterLink v-if="!store.token" to="/login" class="btn-secondary">Login</RouterLink>
+      <RouterLink v-if="!store.token" to="/register" class="btn-primary">Register</RouterLink>
+      <span v-if="store.token" class="user-info">{{ store.userEmail }}</span>
     </nav>
     <RouterView />
   </div>
 </template>
 
 <script>
+import { useGameStore } from './stores/gameStore.js'
+
 export default {
-  name: 'App'
+  name: 'App',
+
+  setup() {
+    const store = useGameStore()
+    return { store }
+  }
 }
 </script>
 
-<style>
-  nav {
-    position: fixed;   
-    top: 0;
-    left: 0;
-    width: 100%;  
 
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+<style scoped>
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(20, 20, 30, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+}
 
-    padding: 1rem 2rem;
-    background: #111111;
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
 
-    box-sizing: border-box;
-    z-index: 1000; 
-  }
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
 
-  nav a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-size: 1rem;
-  }
+a:hover {
+  color: var(--primary);
+}
 
-  nav a:hover {
-    color: white;
-  }
+a.btn-primary {
+  background: var(--primary);
+  color: #000;
+  font-weight: 600;
+}
 
-  nav a.router-link-active {
-    color: #f5c518;
-    font-weight: bold;
-  }
+a.btn-primary:hover {
+  opacity: 0.9;
+}
 
-  body {
-    margin: 0;
-    padding-top: 64px;
-  }
+a.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+}
+
+a.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.user-info {
+  color: var(--success);
+  font-weight: 600;
+}
 </style>
-

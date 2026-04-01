@@ -1,14 +1,14 @@
 <template>
-    <div v-if="store.gameState === 'end'">
+    <div v-if="store.gameState === 'end'" class="score-board card">
         <h2>Game Over</h2>
         <p>You scored {{ store.score }} / {{ store.questions.length }}</p>
 
         <div v-if="store.token">
             <p>Playing as {{ store.userEmail }}</p>
-            <button v-if="!store.scoreSubmitted" @click="store.submitScore()">
+            <button class="btn-success" v-if="!store.scoreSubmitted" @click="store.submitScore()">
             Submit Score
-            </button>
-            <p v-else>Score submitted ✓</p>
+        </button>
+        <p v-else>Score submitted ✓</p>
         </div>
 
         <div v-else>
@@ -17,7 +17,7 @@
             </p>
         </div>
 
-        <button @click="handleRestart">Play Again</button>
+        <button class="btn-secondary" @click="restartGame">Play Again</button>
     </div>
 </template>
 
