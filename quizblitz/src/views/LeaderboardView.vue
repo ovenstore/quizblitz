@@ -32,7 +32,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await fetch('http://localhost:3000/api/scores')
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/scores')
       if (!response.ok) throw new Error('Server error')
       this.scores = await response.json()
     } catch (err) {
