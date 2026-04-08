@@ -59,7 +59,7 @@ export const useGameStore = defineStore('game', {
         },
 
         async startGame() {
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/questions/random')
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/questions/random`)
             const questions = await response.json()
             this.questions = questions
             
@@ -116,7 +116,7 @@ export const useGameStore = defineStore('game', {
         },
 
         async submitScore() {
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/scores', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/scores`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export const useGameStore = defineStore('game', {
         },
 
         async register(email, password) {
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/auth/register', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -145,7 +145,7 @@ export const useGameStore = defineStore('game', {
         },
 
         async login(email, password) {
-            const response = await fetch('${import.meta.env.VITE_API_URL}/api/auth/login', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
